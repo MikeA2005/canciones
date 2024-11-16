@@ -1,0 +1,29 @@
+.rojito {
+  color: #a94747;
+}
+
+.verde {
+  color: #1b8c19;
+}
+
+.imagenListado {
+  width: 60px;
+  height: auto;
+}
+
+.maximoTamanoCreacion {
+  width: 350px;
+  height: auto;
+}
+
+.maximoTamanoGrande {
+  width: 450px;
+  height: auto;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 equal-width columns */
+  gap: 1rem; /* Add spacing between cards */
+  padding-top: 10px;
+}

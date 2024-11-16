@@ -1,4 +1,19 @@
+import { useState } from "react";
+import { ARREGLO_CANCION } from "../../mocks/Cancion-mocks";
+import { Cancion } from "../../modelos/Cancion";
+import { ARREGLO_CANCION_GENERO } from "../../utilidades/dominios/DomGenero";
+
 export const CancionListar = () => {
+  const [arrCanciones] = useState<Cancion[]>(ARREGLO_CANCION);
+
+  const nombreGenero = (valor: string) => {
+    for (const objGenero of ARREGLO_CANCION_GENERO) {
+      if (objGenero.codGenero == valor) {
+        return objGenero.nombreGenero;
+      }
+    }
+  };
+
   return (
     <>
       <div className="pt-5 d-flex justify-content-center">
@@ -9,94 +24,32 @@ export const CancionListar = () => {
                 <th>No.</th>
                 <th>Título Canción</th>
                 <th>Cantante</th>
-                <th>Duración</th>
                 <th>Género</th>
+                <th>Imagen</th>
                 <th>Opciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>La noche</td>
-                <td>Joe Arroyo</td>
-                <td>4.5</td>
-                <td>Salsa</td>
-                <td>
-                  <a href="/canact/1">
-                    <i
-                      className="fa-solid fa-pen-to-square"
-                      style={{ color: "#000080" }}
-                    ></i>
-                  </a>
-                  &nbsp;
-                  <i
-                    className="fa-solid fa-trash"
-                    style={{ color: "#000080" }}
-                  ></i>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Mi ex tenía razón</td>
-                <td>Karol G</td>
-                <td>3.5</td>
-                <td>Reguetón</td>
-                <td>
-                  <a href="/canact/2">
-                    <i
-                      className="fa-solid fa-pen-to-square"
-                      style={{ color: "#000080" }}
-                    ></i>
-                  </a>
-                  &nbsp;
-                  <i
-                    className="fa-solid fa-trash"
-                    style={{ color: "#000080" }}
-                  ></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td>3</td>
-                <td>Sin medir distancia</td>
-                <td>Diomedes Díaz</td>
-                <td>4.8</td>
-                <td>Vallenato</td>
-                <td>
-                  <a href="/canact/3">
-                    <i
-                      className="fa-solid fa-pen-to-square"
-                      style={{ color: "#000080" }}
-                    ></i>
-                  </a>
-                  &nbsp;
-                  <i
-                    className="fa-solid fa-trash"
-                    style={{ color: "#000080" }}
-                  ></i>
-                </td>
-              </tr>
-
-              <tr>
-                <td>4</td>
-                <td>My Immortal</td>
-                <td>Evanescence</td>
-                <td>4.3</td>
-                <td>Rock</td>
-                <td>
-                  <a href="/canact/4">
-                    <i
-                      className="fa-solid fa-pen-to-square"
-                      style={{ color: "#000080" }}
-                    ></i>
-                  </a>
-                  &nbsp;
-                  <i
-                    className="fa-solid fa-trash"
-                    style={{ color: "#000080" }}
-                  ></i>
-                </td>
-              </tr>
+              {arrCanciones.map((miCan: Cancion) => (
+                <tr key={miCan.codCancion}>
+                  <td>{miCan.codCancion}</td>
+                  <td>{miCan.tituloCancion}</td>
+                  <td>{miCan.cantanteCancion}</td>
+                  <td>{nombreGenero(miCan.codGeneroCancion)}</td>
+                  <td>
+                    <img src={miCan.imagenCancionBase64} alt="" className="imagenListado"/>
+                    <br />
+                    {miCan.imagenCancion}
+                  </td>
+                  <td>
+                    <a href="/canact/1">
+                      <i className="fa-solid fa-pen-to-square" style={{ color: "#000080" }}></i>
+                    </a>
+                    &nbsp;
+                    <i className="fa-solid fa-trash" style={{ color: "#000080" }}></i>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
